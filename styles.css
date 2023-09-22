@@ -1,0 +1,285 @@
+@font-face {
+  font-family: "ArchivoExpanded ExtraBold";
+  src: url("fonts/Archivo/ArchivoExpanded-ExtraBold.ttf");
+}
+
+:root {
+  --app-height: 100vh;
+  --dm-yellow: rgb(255, 229, 18);
+  --card-title-width: 64px;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  background-color: black;
+  color: var(--dm-yellow);
+  font-size: 18px;
+  font-family: "ArchivoExpanded ExtraBold";
+  overscroll-behavior: contain;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.allowScroll {
+  height: auto;
+  overflow: auto;
+}
+
+#title {
+  width: 100vw;
+  height: 100%;
+  height: var(--app-height);
+  transition: transform 1s;
+  z-index: 20;
+  position: fixed;
+}
+#title.hide {
+  pointer-events: none;
+  transform: translateX(110%);
+}
+#titleBg {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+#titleContent {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#titleContent > img {
+  max-width: 50vw;
+  max-height: 33vh;
+}
+
+h1 {
+  font-size: 64px;
+  letter-spacing: -4px;
+  margin: 1vw 0;
+}
+
+#verticalScroller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  height: 100%;
+  overflow-y: hidden;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-orientation: mixed;
+  white-space: nowrap;
+}
+#verticalScroller span > span {
+  padding-top: 16px;
+}
+
+#main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#mainIntro {
+  font-size: 14px;
+  width: 35vw;
+  position: absolute;
+  left: 64px;
+  padding: 32px 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#mainIntro > div {
+  padding: 16px 0;
+}
+
+#mainIntro > .logo {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+}
+
+.cards {
+  position: absolute;
+  cursor: pointer;
+}
+
+.card {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(79, 149, 138, 0.055);
+  transition: transform 0.5s;
+}
+.card:nth-child(3n + 1) {
+  background-color: var(--dm-yellow);
+  color: black;
+}
+.card:nth-child(3n + 2) {
+  background-color: #dedede;
+  color: black;
+}
+.card:nth-child(3n + 3) {
+  background-color: #000;
+  color: #fff;
+}
+
+.card:nth-child(3n + 1) .cardRight {
+  /* background-color: var(--dm-yellow);
+  color: black; */
+  background-color: #000;
+  color: #fff;
+}
+.card:nth-child(3n + 2) .cardRight {
+  /* background-color: #dedede;
+  color: black; */
+  background-color: #000;
+  color: var(--dm-yellow);
+}
+.card:nth-child(3n + 3) .cardRight {
+  /* background-color: #000;
+  color: #fff; */
+  background-color: var(--dm-yellow);
+  color: black;
+}
+
+.card:nth-child(3n + 1) .cardBack {
+  /* background-color: var(--dm-yellow);
+  color: black; */
+  background-color: var(--dm-yellow);
+  color: black;
+}
+.card:nth-child(3n + 2) .cardBack {
+  /* background-color: #dedede;
+  color: black; */
+  background-color: #dedede;
+  color: black;
+}
+.card:nth-child(3n + 3) .cardBack {
+  /* background-color: #000;
+  color: #fff; */
+  background-color: #000;
+  color: #fff;
+}
+
+.cardTitle {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-orientation: mixed;
+  height: 100%;
+  font-size: 24px;
+  line-height: 64px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cardLeft {
+  position: absolute;
+  top: 0px;
+  padding: 64px;
+  box-sizing: border-box;
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.cardLeft .cardHandwriting {
+  width: 100%;
+}
+.cardLeft .cardPreviewImage {
+  max-width: 90%;
+  max-height: 80%;
+  margin-bottom: 20%;
+}
+.cardBack {
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  top: 0;
+  right: 0;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  cursor: pointer;
+}
+
+.cardRight {
+  position: absolute;
+  left: 50vw;
+  top: 0;
+  height: 100%;
+  padding-right: 64px;
+  box-sizing: border-box;
+  width: 50vw;
+  font-size: 24px;
+  line-height: 64px;
+  text-align: center;
+}
+
+.cardRight video {
+  max-width: 60vw;
+  max-height: 50vh;
+  min-height: 400px;
+  margin-top: 64px;
+}
+
+.cardMainContent {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.cardMainStory {
+  text-align: left;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 32px 100px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#eventPopup {
+  position: fixed;
+  width: 315px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  background-color: var(--dm-yellow);
+  border: 3px solid black;
+  color: black;
+  padding: 16px 100px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+#eventPopup .close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+}
+
+#eventPopup.show {
+  opacity: 1;
+}
