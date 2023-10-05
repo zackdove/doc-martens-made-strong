@@ -9,6 +9,8 @@ appHeight();
 
 console.log("i");
 
+let hasFocus = false;
+
 const lerp = (current, target, factor) =>
   current * (1 - factor) + target * factor;
 
@@ -94,7 +96,7 @@ function setupCardsDesktop() {
   const cards = document.getElementById("cards").children;
   const offset = 56;
   const maxX = cards.length * offset;
-  let hasFocus = false;
+
   for (let i = 0; i < cards.length; i++) {
     console.log("redo");
     cards[i].style.transform = `translateX(${-(cards.length - i) * offset}px)`;
@@ -155,6 +157,7 @@ function setupCardsDesktop() {
       }
       cards[i].style.transform = `translateX(${-100}%)`;
       video.play();
+      console.log("video play");
     };
     desktopCardClickHandlers.push(clickHandler);
     cards[i].addEventListener("mouseup", clickHandler);
@@ -197,15 +200,12 @@ function setupCardsMobile() {
 
   document.getElementById("main").style.overflowY = "scroll";
   document.getElementById("mainContent").style.overflowY = "hidden";
-  let hasFocus = false;
   for (let i = 0; i < cards.length; i++) {
     cards[i].style.transform = `translateY(${i * offset}px)`;
 
     const clickHandler = (e) => {
       console.log("mobile click");
       if (hasFocus) {
-        cardBackClickHandler(e);
-
         return;
       }
 
@@ -271,6 +271,15 @@ function removeEventListeners() {
         "mouseover",
         desktopCardMouseOverHandlers[i]
       );
+
+      const video = cards[i].querySelector("video");
+      console.log(video.src);
+      video.currentTime = 0;
+      video.pause();
+      if (video.src.includes("mp4")) {
+        video.dataset.vidSrc = video.src;
+        video.src = "";
+      }
       cards[i].removeEventListener("mouseout", desktopCardMouseOutHandlers[i]);
       cards[i].removeEventListener("mouseup", desktopCardClickHandlers[i]);
       cards[i]
@@ -286,6 +295,13 @@ function removeEventListeners() {
     const cards = document.getElementById("cards").children;
     for (let i = 0; i < cards.length; i++) {
       cards[i].removeEventListener("click", mobileCardClickHandlers[i]);
+      const video = cards[i].querySelector("video");
+      video.currentTime = 0;
+      video.pause();
+      if (video.src.includes("mp4")) {
+        video.dataset.vidSrc = video.src;
+        video.src = "";
+      }
       cards[i]
         .querySelector(".cardBack")
         .removeEventListener("click", mobileCardBackClickHandlers[i]);
@@ -297,7 +313,9 @@ function removeEventListeners() {
 
 function handleResize(e) {
   console.log(e);
+
   if (e.target.nodeName !== "VIDEO") {
+    hasFocus = false;
     removeEventListeners();
     if (window.matchMedia("(max-width: 1200px").matches) {
       setupCardsMobile();

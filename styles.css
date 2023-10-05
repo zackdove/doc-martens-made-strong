@@ -423,10 +423,15 @@ h1 {
   .cardRight video {
     width: 100%;
     max-width: unset;
-    max-height: unset;
+    max-height: 90vh;
     min-height: unset;
   }
   .cardMainStory {
     padding: 32px 0;
+  }
+  .cardLeft .cardPreviewImage {
+    max-width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
   }
 }
