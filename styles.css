@@ -111,9 +111,47 @@ h1 {
   transform: translateX(-50%);
 }
 
-.cards {
+#cards {
+  position: fixed;
+  z-index: 2;
+}
+
+.cardQuote {
+  font-size: 24px;
+  padding: 48px 0 64px 0;
+  width: 346px;
+  max-width: 95vw;
+  text-align: center;
+  position: relative;
+}
+.cardQuote.smaller {
+  font-size: 20px;
+  width: 400px;
+}
+.cardQuoteContent {
+  position: relative;
+}
+
+.cardQuoteContent::before {
+  content: "“";
   position: absolute;
-  cursor: pointer;
+  left: 0;
+  top: -36px;
+  font-size: 38px;
+}
+.cardQuoteContent::after {
+  content: "”";
+  position: absolute;
+  right: 0;
+  bottom: -36px;
+  font-size: 38px;
+}
+.cardQuote.smaller .cardQuoteContent::before {
+  font-size: 32px;
+}
+
+.cardQuote.smaller .cardQuoteContent::after {
+  font-size: 32px;
 }
 
 .card {
@@ -125,6 +163,7 @@ h1 {
   z-index: 10;
   background-color: rgba(79, 149, 138, 0.055);
   transition: transform 0.5s;
+  will-change: transform;
 }
 .card:nth-child(3n + 1) {
   background-color: var(--dm-yellow);
@@ -177,15 +216,48 @@ h1 {
   color: #fff;
 }
 
+.card:nth-child(3n + 1) .cardMainStory::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 54px;
+  background-image: url("images/DMs_Yellow_Bouncing Sole logo.png");
+}
+.card:nth-child(3n + 2) .cardMainStory::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 54px;
+  background-image: url("images/DMs_Yellow_Bouncing Sole logo.png");
+}
+.card:nth-child(3n + 3) .cardMainStory::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 54px;
+  background-image: url("images/DMs_Yellow_Bouncing Sole logo_black.png");
+}
+
 .cardTitle {
   writing-mode: vertical-lr;
   transform: rotate(180deg);
   text-orientation: mixed;
   height: 100%;
-  font-size: 24px;
-  line-height: 64px;
+  font-size: 22px;
+  line-height: 56px;
   text-align: center;
   cursor: pointer;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .cardLeft {
@@ -198,7 +270,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .cardLeft .cardHandwriting {
   width: 100%;
@@ -243,6 +315,9 @@ h1 {
   height: 100%;
   overflow-y: scroll;
 }
+.cardMainStory > div {
+  padding: 16px 0;
+}
 
 .cardMainStory {
   text-align: left;
@@ -253,6 +328,11 @@ h1 {
 
 .pointer {
   cursor: pointer;
+}
+
+#mainContent {
+  position: absolute;
+  height: 100vh;
 }
 
 #eventPopup {
@@ -282,4 +362,71 @@ h1 {
 
 #eventPopup.show {
   opacity: 1;
+}
+
+@media screen and (max-width: 792px) {
+  h1 {
+    font-size: 34px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #mainContent {
+    height: auto;
+    position: relative;
+  }
+  #mainIntro {
+    position: relative;
+    width: calc(100vw - 128px);
+    height: auto;
+  }
+  #mainIntro > .logo {
+    position: relative;
+    bottom: 0;
+  }
+  #cards {
+    position: relative;
+  }
+  .card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: unset;
+  }
+  .cardTitle {
+    transform: none;
+    writing-mode: initial;
+  }
+  .cardLeft {
+    padding: 0;
+    width: 100%;
+    position: relative;
+  }
+  .cardRight {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    left: 0;
+  }
+  .cardBack {
+    height: auto;
+    width: 100%;
+    top: unset;
+    bottom: 0;
+    writing-mode: initial;
+    text-orientation: initial;
+  }
+  .cardMainContent {
+    padding: 0 32px 64px;
+    box-sizing: border-box;
+  }
+  .cardRight video {
+    width: 100%;
+    max-width: unset;
+    max-height: unset;
+    min-height: unset;
+  }
+  .cardMainStory {
+    padding: 32px 0;
+  }
 }
